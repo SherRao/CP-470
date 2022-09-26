@@ -3,4 +3,8 @@
     <string name="app_name">AndroidAssignments</string>
     <string name="hello_message">Dia duit Domhanda!!</string>
     <string name="ButtonText">Is Cnaipe mé</string>
+    <string name="UsernameTitle">Logáil isteach</string>
+    <string name="PasswordTitle">Pasfhocal</string>
+    <string name="SwitchText">Cad a dhéanann sé seo?</string>
+    <string name="ImageHint">Deilbhín Ceamara</string>
 </resources>

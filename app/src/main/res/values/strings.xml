@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AndroidAssignments</string>
+    <string name="hello_message">Hello World!</string>
+    <string name="ButtonText">I\'m a button</string>
+    <string name="UsernameTitle">Login</string>
+    <string name="PasswordTitle">Password</string>
+    <string name="SwitchText">What does this do?"</string>
+    <string name="ImageHint">Camera Icon</string>
+</resources>
