@@ -1,36 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
 
     <TextView
+        android:id="@+id/loginUsernameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/UsernameTitle" />
 
     <EditText
+        android:id="@+id/loginUsernameInputField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints="emailAddress"
         android:hint="@string/UsernameTitle"
         android:inputType="textEmailAddress"
-        android:autofillHints="emailAddress"
         tools:ignore="TouchTargetSizeCheck" />
 
     <TextView
+        android:id="@+id/loginPasswordLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/PasswordTitle" />
 
     <EditText
+        android:id="@+id/loginPasswordInputField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autofillHints="password"
         android:hint="@string/PasswordTitle"
         android:inputType="textPassword"
-        android:autofillHints="password"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login" />
 
 </LinearLayout>

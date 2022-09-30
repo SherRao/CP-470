@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listItemsLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ListItemsActivity"
     android:columnCount="2"
-    android:rowCount="2">
+    android:rowCount="2"
+    tools:context=".ListItemsActivity">
 
     <RadioButton
+        android:id="@+id/listItemsRadioButton"
         android:layout_row="0"
         android:layout_column="0"
         android:layout_columnWeight="1"
-        android:gravity="fill"/>
+        android:gravity="fill" />
 
     <CheckBox
+        android:id="@+id/listItemsCheckbox"
         android:layout_row="0"
         android:layout_column="1"
         android:layout_columnWeight="1"
-        android:gravity="fill"/>
+        android:gravity="fill" />
 
     <Switch
+        android:id="@+id/listItemsSwitch"
         android:layout_row="1"
         android:layout_column="0"
         android:layout_columnWeight="1"
@@ -29,11 +32,12 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <ImageButton
+        android:id="@+id/listItemsImageButton"
         android:layout_row="1"
         android:layout_column="1"
-        android:src="@android:drawable/ic_menu_camera"
-        android:contentDescription="@string/ImageHint"
         android:layout_columnWeight="1"
-        android:gravity="fill"/>
+        android:contentDescription="@string/ImageHint"
+        android:gravity="fill"
+        android:src="@android:drawable/ic_menu_camera" />
 
-  </GridLayout>
+</GridLayout>
