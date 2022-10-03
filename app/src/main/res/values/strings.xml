@@ -6,4 +6,15 @@
     <string name="PasswordTitle">Password</string>
     <string name="SwitchText">What does this do?"</string>
     <string name="ImageHint">Camera Icon</string>
+
+    <string name="InvalidEmailToast">Please enter a valid email address!</string>
+    <string name="ListItemsToMainActivityToast">ListItemsActivity passed: </string>
+    <string name="SwitchOnToast">Switch is On</string>
+    <string name="SwitchOffToast">Switch is Off</string>
+
+    <string name="ListItemPromptTitle">Finish Activity?</string>
+    <string name="ListItemPromptQuestion">Do you want to finish this activity?</string>
+    <string name="ListItemPromptYes">OK</string>
+    <string name="ListItemPromptNo">Cancel</string>
+    <string name="ListItemActivityResponse">Here is my response</string>
 </resources>

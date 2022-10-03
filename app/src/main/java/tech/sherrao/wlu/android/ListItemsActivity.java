@@ -3,6 +3,7 @@ package tech.sherrao.wlu.android;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,11 +15,11 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+@SuppressLint("UseSwitchCompatOrMaterialCode")
 public class ListItemsActivity extends AppCompatActivity {
 
+    public static final int IMAGE_CAPTURE_REQUEST_CODE = 1;
     private ImageButton imageButton;
-    private Switch switchToggle;
-    private CheckBox checkbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,33 +30,32 @@ public class ListItemsActivity extends AppCompatActivity {
         imageButton = super.findViewById(R.id.listItemsImageButton);
         imageButton.setOnClickListener((view) -> {
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, 1);
+            startActivityForResult(intent, IMAGE_CAPTURE_REQUEST_CODE);
         });
 
-        switchToggle = super.findViewById(R.id.listItemsSwitch);
+        Switch switchToggle = super.findViewById(R.id.listItemsSwitch);
         switchToggle.setOnCheckedChangeListener((view, isChecked) -> {
-            if(isChecked)
-                print("Switch is On", Toast.LENGTH_SHORT);
+            if (isChecked)
+                print(super.getString(R.string.SwitchOnToast), Toast.LENGTH_SHORT);
 
             else
-                print("Switch is Off", Toast.LENGTH_LONG);
+                print(super.getString(R.string.SwitchOffToast), Toast.LENGTH_LONG);
         });
 
-        checkbox = super.findViewById(R.id.listItemsCheckbox);
+        CheckBox checkbox = super.findViewById(R.id.listItemsCheckbox);
         checkbox.setOnCheckedChangeListener((view, isChecked) -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(ListItemsActivity.this);
-            builder.setMessage("Do you want to finish this activity?")
-                    .setTitle("Finish Activity?")
-                    .setPositiveButton("Ok", (dialog, id) -> {
-                        Intent resultIntent = new Intent(  );
-                        resultIntent.putExtra("Response", "Here is my response");
+            builder.setMessage(super.getString(R.string.ListItemPromptQuestion))
+                    .setTitle(super.getString(R.string.ListItemPromptTitle))
+                    .setPositiveButton(super.getString(R.string.ListItemPromptYes), (dialog, id) -> {
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("Response", super.getString(R.string.ListItemActivityResponse));
                         setResult(Activity.RESULT_OK, resultIntent);
                         finish();
                     })
-                    .setNegativeButton("Cancel", (dialog, id) ->  {
+                    .setNegativeButton(super.getString(R.string.ListItemPromptNo), (dialog, id) -> {
                     })
                     .show();
-
         });
     }
 
@@ -92,7 +92,7 @@ public class ListItemsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
+        if (requestCode == IMAGE_CAPTURE_REQUEST_CODE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             imageButton.setImageBitmap(imageBitmap);

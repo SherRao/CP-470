@@ -7,10 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Button mainButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(this.getClass().getSimpleName(), "In onCreate()");
         setContentView(R.layout.activity_main);
 
-        mainButton = super.findViewById(R.id.mainButton);
+        Button mainButton = super.findViewById(R.id.mainButton);
         mainButton.setOnClickListener((view) -> {
             Intent intent = new Intent(MainActivity.this, ListItemsActivity.class);
             startActivityForResult(intent, 10);
@@ -61,9 +60,14 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == 10)
             Log.i(this.getClass().getSimpleName(), "Returned to MainActivity.onActivityResult");
 
-        else if(requestCode == Activity.RESULT_OK) {
+        if(responseCode == Activity.RESULT_OK) {
             String messagePassed = data.getStringExtra("Response");
+            print(super.getString(R.string.ListItemsToMainActivityToast) + messagePassed, Toast.LENGTH_LONG);
         }
-        
+    }
+
+    private void print(String message, int toastDuration) {
+        Toast toast = Toast.makeText(this, message, toastDuration);
+        toast.show();
     }
 }
