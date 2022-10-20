@@ -9,6 +9,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import tech.sherrao.wlu.android.toolbar.TestToolbar;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -28,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
             Log.i(this.getClass().getSimpleName(), "User clicked Start Chat");
 
             Intent intent = new Intent(MainActivity.this, ChatWindow.class);
+            startActivity(intent);
+        });
+
+        Button testToolbarButton = super.findViewById(R.id.testToolbarButton);
+        testToolbarButton.setOnClickListener((view) -> {
+            Intent intent = new Intent(this, TestToolbar.class);
             startActivity(intent);
         });
     }
