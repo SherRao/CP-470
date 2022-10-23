@@ -34,7 +34,7 @@ public class TestToolbar extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-        NavController navController = Navigation.findNavController(this, R.id.toolbar);
+        NavController navController = Navigation.findNavController(this, binding.toolbar.getId());
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
@@ -44,13 +44,12 @@ public class TestToolbar extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.toolbar);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+        NavController navController = Navigation.findNavController(this, binding.toolbar.getId());
+        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
 
-    @SuppressLint("ResourceType")
     @Override
+    @SuppressLint("ResourceType")
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         super.getLayoutInflater().inflate(R.menu.toolbar_menu, (ViewGroup) menu);
@@ -61,7 +60,6 @@ public class TestToolbar extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         super.onOptionsItemSelected(menuItem);
-
         int id = menuItem.getItemId();
         switch(id) {
             case R.id.toolbar_menu_action_one:
