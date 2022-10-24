@@ -1,13 +1,14 @@
 package tech.sherrao.wlu.android.toolbar;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 import com.google.android.material.snackbar.Snackbar;
@@ -51,20 +52,28 @@ public class TestToolbar extends AppCompatActivity {
     }
 
     @Override
+    @SuppressLint("NonConstantResourceId")
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        int id = menuItem.getItemId();
-        switch(id) {
+        switch(menuItem.getItemId()) {
             case R.id.toolbar_menu_action_one:
                 Log.d("Toolbar", "Option 1 selected");
+                Toast.makeText(this, "Option 1 selected", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.toolbar_menu_action_two:
                 Log.d("Toolbar", "Option 2 selected");
-                startActivity(new Intent(this, MainActivity.class));
+                Toast.makeText(this, "Option 2 selected", Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(TestToolbar.this);
+                builder.setTitle(R.string.ToolbarDialogTitle);
+                builder.setPositiveButton(R.string.ToolbarDialogOk, (dialog, id) -> finish());
+                builder.setNegativeButton(R.string.ToolbarDialogCancel, (dialog, id) -> {});
+                builder.create().show();
                 break;
 
             case R.id.toolbar_menu_action_three:
                 Log.d("Toolbar", "Option 3 selected");
+                Toast.makeText(this, "Option 3 selected", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.toolbar_menu_action_four:
