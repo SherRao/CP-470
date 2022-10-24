@@ -6,15 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
 import com.google.android.material.snackbar.Snackbar;
 
 import tech.sherrao.wlu.android.MainActivity;
@@ -34,9 +29,9 @@ public class TestToolbar extends AppCompatActivity {
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-        NavController navController = Navigation.findNavController(this, binding.toolbar.getId());
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+//        NavController navController = Navigation.findNavController(this, binding.toolbar.getId());
+//        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
         binding.fab.setOnClickListener(view -> Snackbar.make(view, "This is a string!", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
@@ -44,22 +39,19 @@ public class TestToolbar extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, binding.toolbar.getId());
-        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
-    }
-
-    @Override
-    @SuppressLint("ResourceType")
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        super.getLayoutInflater().inflate(R.menu.toolbar_menu, (ViewGroup) menu);
+//        NavController navController = Navigation.findNavController(this, binding.toolbar.getId());
+//        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
         return true;
     }
 
     @Override
-    @SuppressLint("NonConstantResourceId")
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        super.onOptionsItemSelected(menuItem);
         int id = menuItem.getItemId();
         switch(id) {
             case R.id.toolbar_menu_action_one:
@@ -85,6 +77,6 @@ public class TestToolbar extends AppCompatActivity {
                 break;
         }
 
-        return true;
+        return super.onOptionsItemSelected(menuItem);
     }
 }

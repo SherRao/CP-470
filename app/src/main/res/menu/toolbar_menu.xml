@@ -21,7 +21,7 @@
         app:showAsAction="always"/>
 
     <item android:id="@+id/toolbar_menu_action_four"
-        android:title="Three"
+        android:title="Four"
         android:orderInCategory="103"
         app:showAsAction="never"/>
 </menu>
