@@ -47,6 +47,8 @@ public class ChatWindow extends AppCompatActivity {
         }
     }
 
+    private ChatDatabaseHelper db;
+    private ChatAdapter adapter;
 
     private List<String> chatMessages;
     private ListView chatList;
@@ -58,7 +60,8 @@ public class ChatWindow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_window);
 
-        ChatAdapter adapter = new ChatAdapter(this);
+        db = new ChatDatabaseHelper(this);
+        adapter = new ChatAdapter(this);
         chatMessages = new ArrayList<>();
         chatList = super.findViewById(R.id.chatList);
         chatList.setAdapter(adapter);
@@ -68,9 +71,13 @@ public class ChatWindow extends AppCompatActivity {
         sendChatButton.setOnClickListener((view) -> {
             String message = chatInputField.getText().toString();
             chatMessages.add(message);
+            db.saveMessage(message);
 
             adapter.notifyDataSetChanged();
             chatInputField.setText("");
         });
+
+        chatMessages.addAll(db.getStoredMessages());
+        adapter.notifyDataSetChanged();
     }
 }
