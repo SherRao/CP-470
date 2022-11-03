@@ -80,4 +80,10 @@ public class ChatWindow extends AppCompatActivity {
         chatMessages.addAll(db.getStoredMessages());
         adapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        db.onDestroy();
+    }
 }

@@ -14,13 +14,12 @@ import java.util.List;
 public class ChatDatabaseHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_NAME = "messages";
-    public static final int VERSION_NUM = 1;
+    public static final int VERSION_NUM = 3;
     public static final String ID_COLUMN = "Id";
     public static final String MESSAGE_COLUMN = "Message";
 
     private SQLiteDatabase readDb;
     private SQLiteDatabase writeDb;
-
 
     public ChatDatabaseHelper(Context context) {
         super(context, TABLE_NAME, null, VERSION_NUM);
@@ -30,7 +29,7 @@ public class ChatDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.i("ChatDatabaseHelper", "Calling onCreate()");
+        Log.i(this.getClass().getSimpleName(), "Calling onCreate()");
 
         String query = String.format("CREATE TABLE %s (%s INT AUTO_INCREMENT, %s VARCHAR(255))", TABLE_NAME, ID_COLUMN, MESSAGE_COLUMN);
         db.execSQL(query);
@@ -38,7 +37,7 @@ public class ChatDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.i("ChatDatabaseHelper", "Calling onUpgrade(), oldVersion=" + oldVersion + ", newVersion=" + newVersion);
+        Log.i(this.getClass().getSimpleName(), "Calling onUpgrade(), oldVersion=" + oldVersion + ", newVersion=" + newVersion);
 
         String query = String.format("DROP TABLE IF EXISTS %s", TABLE_NAME);
         db.execSQL(query);
@@ -55,17 +54,19 @@ public class ChatDatabaseHelper extends SQLiteOpenHelper {
     @SuppressLint("Range")
     public List<String> getStoredMessages() {
         List<String> result = new ArrayList<>();
-        Cursor cursor = this.readDb.query(
-                TABLE_NAME, new String[] {MESSAGE_COLUMN}, null, null, null, null, null, null );
+        Cursor cursor = this.readDb.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+//                this.readDb.query(TABLE_NAME, new String[] {MESSAGE_COLUMN}, null, null, null, null, null, null );
 
         if(cursor.getColumnIndex(MESSAGE_COLUMN) == -1)
             return result;
 
-        while(cursor.isAfterLast()) {
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()) {
             String message = cursor.getString( cursor.getColumnIndex(MESSAGE_COLUMN) );
             result.add(message);
+            cursor.moveToNext();
 
-            Log.i("ChatDatabaseHelper", "Retrieving message: \"" + message + "\"");
+            Log.i(this.getClass().getSimpleName(), "Retrieving message: \"" + message + "\"");
         }
 
         cursor.close();
@@ -73,10 +74,7 @@ public class ChatDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public void onDestroy() {
-        Log.i("ChatDatabaseHelper", "Calling onDestroy()");
-
+        Log.i(this.getClass().getSimpleName(), "Calling onDestroy()");
         super.close();
-//        super.getReadableDatabase().close();
-//        super.getWritableDatabase().close();
     }
 }
