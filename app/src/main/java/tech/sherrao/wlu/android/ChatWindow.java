@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,10 +56,15 @@ public class ChatWindow extends AppCompatActivity {
     private EditText chatInputField;
     private Button sendChatButton;
 
+    private boolean frameLayoutExists;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_window);
+        super.setContentView(R.layout.activity_chat_window);
+
+        frameLayoutExists = super.findViewById(R.id.chatFrame) != null
+        Log.i(this.getClass().getSimpleName(), "FrameLayout " + (frameLayoutExists ? "exists" : "doesn't exist") + " in ChatWindow");
 
         db = new ChatDatabaseHelper(this);
         adapter = new ChatAdapter(this);
