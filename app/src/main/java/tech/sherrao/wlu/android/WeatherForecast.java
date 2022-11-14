@@ -68,9 +68,9 @@ public class WeatherForecast extends AppCompatActivity {
 
             progressBar.setVisibility(View.INVISIBLE);
             weatherImage.setImageBitmap(currentWeatherImage);
-            minTemperatureText.setText(minTemperature);
-            maxTemperatureText.setText(maxTemperature);
-            currentTemperatureText.setText(currentTemperature);
+            minTemperatureText.setText("Min Temp: " + minTemperature);
+            maxTemperatureText.setText("Max Temp: " + maxTemperature);
+            currentTemperatureText.setText("Current Temp: " + currentTemperature);
             super.onPostExecute(result);
         }
 
@@ -85,59 +85,55 @@ public class WeatherForecast extends AppCompatActivity {
 
                 int eventType = xpp.getEventType();
                 while (eventType != XmlPullParser.END_DOCUMENT) {
-                    if(eventType == XmlPullParser.START_DOCUMENT) {
-                        Log.d(this.getClass().getSimpleName(),"Start document");
-
-                    } else if(eventType == XmlPullParser.START_TAG) {
-                        Log.d(this.getClass().getSimpleName(),"Start tag "+xpp.getName());
+                    if(eventType == XmlPullParser.START_TAG) {
                         String tag = xpp.getName();
-                        if(tag.equals("temperature")) {
+                        if (tag.equals("temperature")) {
                             this.currentTemperature = xpp.getAttributeValue(null, "value");
                             super.publishProgress(25);
+                            Log.i(this.getClass().getSimpleName(), "Found value from XML for current temperature=" + currentTemperature);
+
                             this.minTemperature = xpp.getAttributeValue(null, "min");
                             super.publishProgress(50);
+                            Log.i(this.getClass().getSimpleName(), "Found value from XML for min temperature=" + currentTemperature);
+
                             this.maxTemperature = xpp.getAttributeValue(null, "max");
                             super.publishProgress(75);
+                            Log.i(this.getClass().getSimpleName(), "Found value from XML for max temperature=" + currentTemperature);
 
-                            Log.i(this.getClass().getSimpleName(), "***VAL=" + currentTemperatureText);
-                            Log.i(this.getClass().getSimpleName(), "***MIN=" + minTemperature);
-                            Log.i(this.getClass().getSimpleName(), "***MAX=" + maxTemperature);
-
-                        } else if(tag.equals("weather")) {
+                        } else if (tag.equals("weather")) {
                             String iconName = xpp.getAttributeValue(null, "icon");
-                            Log.i(this.getClass().getSimpleName(), "***ICON=" + iconName);
+                            Log.i(this.getClass().getSimpleName(), "Found value from XML for icon=" + iconName);
 
                             String fileName = iconName + ".png";
                             Bitmap bitmap = null;
                             File file = getBaseContext().getFileStreamPath(fileName);
-                            if(!file.exists()) {
+                            if (!file.exists()) {
                                 bitmap = downloadImage(iconName);
-                                FileOutputStream outputStream = openFileOutput( fileName, Context.MODE_PRIVATE);
+                                FileOutputStream outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
 
                                 bitmap.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
                                 outputStream.flush();
                                 outputStream.close();
+
                             } else {
                                 try {
                                     FileInputStream fis = openFileInput(fileName);
                                     bitmap = BitmapFactory.decodeStream(fis);
-                                } catch (FileNotFoundException e) { e.printStackTrace(); }
+
+                                } catch (FileNotFoundException e) {
+                                    e.printStackTrace();
+                                }
                             }
 
                             super.publishProgress(100);
                             currentWeatherImage = bitmap;
                         }
-
-                    } else if(eventType == XmlPullParser.END_TAG) {
-                        Log.d(this.getClass().getSimpleName(),"End tag "+xpp.getName());
-
-                    } else if(eventType == XmlPullParser.TEXT) {
-                        Log.d(this.getClass().getSimpleName(),"Text "+xpp.getText());
                     }
+
                     eventType = xpp.next();
                 }
 
-                Log.d(this.getClass().getSimpleName(),"End document");
+                Log.d(this.getClass().getSimpleName(),"End of parsing XML data!");
 
             } catch (XmlPullParserException | IOException e) {
                 e.printStackTrace();
