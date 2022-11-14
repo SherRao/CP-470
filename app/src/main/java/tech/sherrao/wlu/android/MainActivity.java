@@ -21,13 +21,15 @@ public class MainActivity extends AppCompatActivity {
 
         Button mainButton = super.findViewById(R.id.mainButton);
         mainButton.setOnClickListener((view) -> {
+            Log.i(this.getClass().getSimpleName(), "User clicked main button");
+
             Intent intent = new Intent(MainActivity.this, ListItemsActivity.class);
             startActivityForResult(intent, 10);
         });
 
         Button startChatButton = super.findViewById(R.id.startChatButton);
         startChatButton.setOnClickListener((view) -> {
-            Log.i(this.getClass().getSimpleName(), "User clicked Start Chat");
+            Log.i(this.getClass().getSimpleName(), "User clicked Start Chat button");
 
             Intent intent = new Intent(MainActivity.this, ChatWindow.class);
             startActivity(intent);
@@ -35,7 +37,17 @@ public class MainActivity extends AppCompatActivity {
 
         Button testToolbarButton = super.findViewById(R.id.testToolbarButton);
         testToolbarButton.setOnClickListener((view) -> {
-            Intent intent = new Intent(this, TestToolbar.class);
+            Log.i(this.getClass().getSimpleName(), "User clicked Test Toolbar button");
+
+            Intent intent = new Intent(MainActivity.this, TestToolbar.class);
+            startActivity(intent);
+        });
+
+        Button openWeatherForecastButton = super.findViewById(R.id.openWeatherForecast);
+        openWeatherForecastButton.setOnClickListener((view) -> {
+            Log.i(this.getClass().getSimpleName(), "User clicked Weather Forecast button");
+
+            Intent intent = new Intent(MainActivity.this, WeatherForecast.class);
             startActivity(intent);
         });
     }
