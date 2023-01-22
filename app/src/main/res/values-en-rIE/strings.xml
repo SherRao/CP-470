@@ -3,4 +3,19 @@
     <string name="app_name">AndroidAssignments</string>
     <string name="hello_message">Dia duit Domhanda!!</string>
     <string name="ButtonText">Is Cnaipe mé</string>
+    <string name="UsernameTitle">Logáil isteach</string>
+    <string name="PasswordTitle">Pasfhocal</string>
+    <string name="SwitchText">Cad a dhéanann sé seo?</string>
+    <string name="ImageHint">Deilbhín Ceamara</string>
+
+    <string name="InvalidEmailToast">Cuir isteach seoladh ríomhphoist bailí!</string>
+    <string name="ListItemsToMainActivityToast">ListItemsActivity ritheadh:</string>
+    <string name="SwitchOnToast">Tá an lasc ar siúl</string>
+    <string name="SwitchOffToast">Tá an lasc as</string>
+
+    <string name="ListItemPromptTitle">Críochnaigh Gníomhaíocht?</string>
+    <string name="ListItemPromptQuestion">Ar mhaith leat an ghníomhaíocht seo a chríochnú?</string>
+    <string name="ListItemPromptYes">Ceart go leor</string>
+    <string name="ListItemPromptNo">Cealaigh</string>
+    <string name="ListItemActivityResponse">Seo é mo fhreagra</string>
 </resources>

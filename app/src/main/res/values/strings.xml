@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">AndroidAssignments</string>
+    <string name="hello_message">Hello World!</string>
+    <string name="ButtonText">I\'m a button</string>
+    <string name="UsernameTitle">Login</string>
+    <string name="PasswordTitle">Password</string>
+    <string name="SwitchText">What does this do?"</string>
+    <string name="ImageHint">Camera Icon</string>
+
+    <string name="InvalidEmailToast">Please enter a valid email address!</string>
+    <string name="ListItemsToMainActivityToast">ListItemsActivity passed: </string>
+    <string name="SwitchOnToast">Switch is On</string>
+    <string name="SwitchOffToast">Switch is Off</string>
+
+    <string name="ListItemPromptTitle">Finish Activity?</string>
+    <string name="ListItemPromptQuestion">Do you want to finish this activity?</string>
+    <string name="ListItemPromptYes">OK</string>
+    <string name="ListItemPromptNo">Cancel</string>
+    <string name="ListItemActivityResponse">Here is my response</string>
+
+    <string name="SendChatButton">Send Chat</string>
+    <string name="title_activity_test_toolbar">TestToolbar</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="one">One</string>
+    <string name="two">Two</string>
+    <string name="three">Three</string>
+    <string name="four">Four</string>
+    <string name="ToolbarDialogTitle">Do you want to go back?</string>
+    <string name="ToolbarDialogOk">OK</string>
+    <string name="ToolbarDialogCancel">Cancel</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
