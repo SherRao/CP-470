@@ -18,8 +18,9 @@ public class ChatDatabaseHelper extends SQLiteOpenHelper {
     public static final String ID_COLUMN = "Id";
     public static final String MESSAGE_COLUMN = "Message";
 
-    private SQLiteDatabase readDb;
-    private SQLiteDatabase writeDb;
+    private final SQLiteDatabase readDb;
+    private final SQLiteDatabase writeDb;
+    private Cursor cursor;
 
     public ChatDatabaseHelper(Context context) {
         super(context, TABLE_NAME, null, VERSION_NUM);
@@ -54,9 +55,7 @@ public class ChatDatabaseHelper extends SQLiteOpenHelper {
     @SuppressLint("Range")
     public List<String> getStoredMessages() {
         List<String> result = new ArrayList<>();
-        Cursor cursor = this.readDb.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-//                this.readDb.query(TABLE_NAME, new String[] {MESSAGE_COLUMN}, null, null, null, null, null, null );
-
+        cursor = this.readDb.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         if(cursor.getColumnIndex(MESSAGE_COLUMN) == -1)
             return result;
 
@@ -71,6 +70,19 @@ public class ChatDatabaseHelper extends SQLiteOpenHelper {
 
         cursor.close();
         return result;
+    }
+
+    public int getItemId(int position) {
+        if(cursor == null || cursor.isClosed())
+            return -1;
+
+        cursor.moveToPosition(position);
+        int columnIndex = cursor.getColumnIndex(ID_COLUMN);
+        if(columnIndex < 0)
+            return -1;
+
+        int id = cursor.getInt(columnIndex);
+        return id;
     }
 
     public void onDestroy() {

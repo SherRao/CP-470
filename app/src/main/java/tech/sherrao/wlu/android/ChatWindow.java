@@ -3,6 +3,8 @@ package tech.sherrao.wlu.android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +26,11 @@ public class ChatWindow extends AppCompatActivity {
 
         public ChatAdapter(Context ctx) {
             super(ctx, 0);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return db != null ? db.getItemId(position) : -1;
         }
 
         @Override
@@ -63,7 +70,7 @@ public class ChatWindow extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_chat_window);
 
-        frameLayoutExists = super.findViewById(R.id.chatFrame) != null
+        frameLayoutExists = super.findViewById(R.id.chatFrame) != null;
         Log.i(this.getClass().getSimpleName(), "FrameLayout " + (frameLayoutExists ? "exists" : "doesn't exist") + " in ChatWindow");
 
         db = new ChatDatabaseHelper(this);
@@ -81,6 +88,12 @@ public class ChatWindow extends AppCompatActivity {
 
             adapter.notifyDataSetChanged();
             chatInputField.setText("");
+        });
+
+        chatList.setOnItemClickListener((parent, view, pos, id) -> {
+            super.getFragmentManager().beginTransaction()
+                    .add(R.id.messageFragmentLayout, (Fragment) new MessageFragment(), null)
+                    .commit();
         });
 
         chatMessages.addAll(db.getStoredMessages());

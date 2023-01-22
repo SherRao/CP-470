@@ -41,7 +41,6 @@ public class TestToolbar extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
 //        NavController navController = Navigation.findNavController(this, binding.toolbar.getId());
-//        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
         return true;
     }
 
